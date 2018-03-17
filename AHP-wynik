@@ -1,0 +1,48 @@
+{
+  "headId": "sat",
+  "comparisons": [
+    {
+      "id": "sat",
+      "parents": [],
+      "alternatives": [
+        "wyg",
+        "med"
+      ]
+    },
+    {
+      "id": "med",
+      "parents": [
+        "sat"
+      ],
+      "alternatives": [
+        "car1",
+        "car2"
+      ],
+      "weightRatios": [
+        [
+          1.0,
+          3.0
+        ],
+        [
+          0.333333,
+          1.0
+        ]
+      ]
+    },
+    {
+      "id": "wyg",
+      "parents": [
+        "sat"
+      ],
+      "alternatives": [
+        "car1",
+        "car2"
+      ]
+    }
+  ],
+  "alternatives": [
+    "car1",
+    "car2",
+    "car3"
+  ]
+}

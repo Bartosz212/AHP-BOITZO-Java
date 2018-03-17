@@ -60,7 +60,9 @@ public class AHP {
     }
 
     public void addWeight(){
-        comparisons.get(1).addWeightRatios();
+        for(PairwiseComparison comparison: comparisons){
+            comparison.addWeightRatios();
+        }
     }
 
     public static void saveToJson() {

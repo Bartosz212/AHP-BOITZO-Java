@@ -13,14 +13,33 @@ public class PairwiseComparison {
         System.out.println("Uzupełnianie macierzy porownań dla "+ id);
         int i = 0;
         int j = 0;
+        int swap = 0;
         Scanner odczyt = new Scanner(System.in);
         for(String alter1: alternatives){
             for(String alter2: alternatives){
                 if(alter1.equals(alter2)){
                     weightRatios[i][j] = 1;
-                }else{
-                    System.out.println("Ile razy bardziej wolisz "+alter1+" niż "+alter2);
-                    weightRatios[i][j] = odczyt.nextDouble();
+                } else if (weightRatios[i][j] == 0){
+                    System.out.println("Co bardziej wolisz. Jeśli "+alter1+" kliknij 1, jeśli "+alter2+ " kliknij 2, jeśli tak samo to kliknij 3.");
+                    swap = odczyt.nextInt();
+                    switch (swap){
+                        case 1:
+                            System.out.println("O ile bardziej wolisz "+alter1+" niż "+alter2);
+                            weightRatios[i][j] = odczyt.nextDouble();
+                            weightRatios[j][i] = 1/(weightRatios[i][j]);
+                            break;
+                        case 2:
+                            System.out.println("O ile bardziej wolisz "+alter2+" niż "+alter1);
+                            weightRatios[j][i] = odczyt.nextDouble();
+                            weightRatios[i][j] = 1/(weightRatios[j][i]);
+                            break;
+                        case 3:
+                            weightRatios[i][j] = 1;
+                            weightRatios[j][i] = 1;
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 j++;
             }

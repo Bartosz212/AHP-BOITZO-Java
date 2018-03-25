@@ -66,8 +66,23 @@ public class AHP {
     }
 
     public void calculateWeightVector(){
-        for (PairwiseComparison comp: comparisons){
-            comp.geometricMeanMethod();
+        Scanner odczyt = new Scanner(System.in);
+        System.out.println("Wybierz metodę obliczania wag.\n1 - Metoda średnich geometrycznych\n2 -  Metoda wektorów własnych");
+        int wyb;
+        wyb = odczyt.nextInt();
+        switch (wyb) {
+            case 1:
+                for (PairwiseComparison comp : comparisons) {
+                    comp.geometricMeanMethod();
+                }
+            case 2:
+                for (PairwiseComparison comp : comparisons) {
+                    comp.eigenvalueMethod();
+                }
+                break;
+
+            default:
+                break;
         }
     }
 

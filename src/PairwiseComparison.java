@@ -1,4 +1,8 @@
 import java.util.*;
+import org.apache.commons.math3.linear.Array2DRowRealMatrix;
+import org.apache.commons.math3.linear.EigenDecomposition;
+import org.apache.commons.math3.linear.RealVector;
+
 public class PairwiseComparison {
 
     public String id;
@@ -7,6 +11,25 @@ public class PairwiseComparison {
 
     private double[][] weightRatios;
     private double[] weightVector;
+
+    public void eigenvalueMethod() {
+        weightVector = new double[alternatives.size()];
+        Array2DRowRealMatrix matrix = new Array2DRowRealMatrix(weightRatios);
+        EigenDecomposition eigen = new EigenDecomposition(matrix);
+        int eigenIndex = 0;
+        for (int k = 0; k < eigen.getRealEigenvalues().length; k++) {
+            eigenIndex = (eigen.getRealEigenvalue(k) > eigen.getRealEigenvalue(eigenIndex)) ? k : eigenIndex;
+        }
+
+        double sum = 0.0;
+        RealVector vector = eigen.getEigenvector(eigenIndex);
+        for (double d : vector.toArray()) {
+            sum += d;
+        }
+        for (int k = 0; k < vector.getDimension(); k++) {
+            weightVector[k] = vector.getEntry(k) / sum;
+        }
+    }
 
     public void geometricMeanMethod(){
         weightVector = new double[alternatives.size()];

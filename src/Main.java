@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         currentFile = new File("AHP-wynik");
         AHP.loadFromJson();
-        AHP.addWeight();
+        AHP.calculateWeightVector();
         AHP.saveToJson();
     }
 

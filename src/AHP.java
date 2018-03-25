@@ -65,6 +65,12 @@ public class AHP {
         }
     }
 
+    public void calculateWeightVector(){
+        for (PairwiseComparison comp: comparisons){
+            comp.geometricMeanMethod();
+        }
+    }
+
     public static void saveToJson() {
         if (Main.currentFile == null) {
             return;

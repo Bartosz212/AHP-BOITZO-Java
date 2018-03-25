@@ -8,6 +8,23 @@ public class PairwiseComparison {
     private double[][] weightRatios;
     private double[] weightVector;
 
+    public void geometricMeanMethod(){
+        weightVector = new double[alternatives.size()];
+        double result;
+        double sum = 0;
+        for(int i=0; i<alternatives.size(); i++){
+            result = 1;
+            for(int j=0; j<alternatives.size(); j++){
+                result = result * weightRatios[i][j];
+            }
+            sum = sum + Math.pow(result, 1.0/alternatives.size());
+            weightVector[i] = Math.pow(result, 1.0/alternatives.size());
+        }
+        for(int i=0; i<alternatives.size(); i++){
+            weightVector[i] = weightVector[i]/sum;
+        }
+    }
+
     public void addWeightRatios(){
         weightRatios = new double[alternatives.size()][alternatives.size()];
         System.out.println("Uzupełnianie macierzy porownań dla "+ id);
@@ -75,6 +92,7 @@ public class PairwiseComparison {
             }
         }
     }
+
     public void addAlternatives() {
         System.out.println("Wprowadzanie alternatyw");
         alternatives = new ArrayList<>();
@@ -102,6 +120,7 @@ public class PairwiseComparison {
         addParents();
         addAlternatives();
     }
+
     public static PairwiseComparison get(String id){
         for( PairwiseComparison comparison : Main.AHP.comparisons ){
             if( comparison.id.equals(id)){
